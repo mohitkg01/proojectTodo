@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin3Line } from "react-icons/ri";
+import { BsCSquare } from "react-icons/bs";
 
 
 //getting local data
@@ -18,22 +19,21 @@ const [inputData,setInput]=useState("");
 const [list,setList]=useState(getLocalData());
 const [isEdited,setEdited]=useState("");
 const [toggleBtn,settoggleBtn]=useState(false);
-const [inputDate,setInputDate]=useState(new Date());
+const [inputDate,setInputDate]=useState( new Date());
 
 const changeHandler=((e)=>{
     setInput(e.target.value);
-   
 });
 
 //adding 
 const addItem=(()=>{
-    if(!inputData){
-        alert("please enter something");
+    if(!inputData || !inputDate){
+        alert("please enter something and Date");
     }
-    else if(inputData && toggleBtn){
+    else if(inputData && toggleBtn && inputDate){
         setList(
             list.map((ele)=>{
-                console.log(isEdited);
+                // console.log(isEdited);
                 if(ele.id===isEdited){
                     return {...ele,data:inputData};
                 }
@@ -49,9 +49,11 @@ const addItem=(()=>{
         id: Math.random(),
         data: inputData,
         date:inputDate,
+        complete:false,
     }
     setList([...list,itemList]);
     setInput("");
+    setInputDate("")
     // console.log(list);
     
 }
@@ -77,6 +79,18 @@ const deleteItem=((idx)=>{
         settoggleBtn(true);
     });
 
+//Completed
+const compItem = (idx) => {
+    setList((prevlist) => {
+      return prevlist.map((ele) => {
+        if (ele.id === idx) {
+          return { ...ele, completed: !ele.completed };
+        }
+        return ele;
+      });
+    });
+  };
+
 
 //Adding local storage
 useEffect(()=>{
@@ -91,7 +105,7 @@ useEffect(()=>{
         <div className="items">
             <div className="inputs">
             <input type="text" placeholder="Add task here..." value={inputData} onChange={changeHandler}/>
-            <input type="date"  value={inputData} onChange={(e)=> setInputDate(e.target.value)}/>
+            <input type="date"  value={inputDate} onChange={(e)=> setInputDate(e.target.value)}/>
             </div>
             { toggleBtn ? (<button onClick={addItem}>Add </button>):(
                 <button onClick={addItem}>Add New</button>
@@ -102,13 +116,16 @@ useEffect(()=>{
             {list.map((curItem) =>{
                 return(
                 <li key={curItem.id}>
-                   <div> {curItem.data}
+                   <div style={{
+                    textDecoration: curItem.completed ? 'line-through' : 'none',
+                  color: curItem.completed ? 'red' : 'black',
+                }}> {curItem.data}
                    {curItem.date}</div>
               <div className="task-btn">
-                <div onClick={()=>deleteItem(curItem.id)}><RiDeleteBin3Line/></div>
-                <div onClick={()=>editItem(curItem.id)}><FaEdit/></div>
-              </div>
-                    
+                <div onClick={()=>deleteItem(curItem.id)} title='Delete Task'><RiDeleteBin3Line/></div>
+                <div onClick={()=>editItem(curItem.id)} title='Edit Task'><FaEdit/></div>
+                <div onClick={()=>compItem(curItem.id)} title='Task Completed'><BsCSquare/></div>
+              </div>    
                 </li>
            ) })}
            </ul>   
