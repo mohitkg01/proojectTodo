@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin3Line } from "react-icons/ri";
 import { BsCSquare } from "react-icons/bs";
-
+import {DragDropContext,Draggable,Droppable} from "react-beautiful-dnd";
 
 //getting local data
 const getLocalData=(()=>{
@@ -20,6 +20,7 @@ const [list,setList]=useState(getLocalData());
 const [isEdited,setEdited]=useState("");
 const [toggleBtn,settoggleBtn]=useState(false);
 const [inputDate,setInputDate]=useState( new Date());
+const [filt,setFilt]=useState('');
 
 const changeHandler=((e)=>{
     setInput(e.target.value);
@@ -90,6 +91,7 @@ const compItem = (idx) => {
       });
     });
   };
+  
 
 
 //Adding local storage
@@ -97,6 +99,20 @@ useEffect(()=>{
            localStorage.setItem("myList",JSON.stringify(list));   
 },[list]);
 
+//filtering 
+const filterItem = (event) => {
+    // console.log(event.target.value);
+    setFilt(event.target.value);
+  };
+
+  const filteredList = list.filter((curItem) => {
+    if (filt === 'true' && !curItem.completed) {
+      return false;
+    } else if (filt === 'false' && curItem.completed) {
+      return false;
+    }
+    return true;
+  });
 
 
   return (
@@ -111,26 +127,40 @@ useEffect(()=>{
                 <button onClick={addItem}>Add New</button>
             )}
         </div>
-        <div className="itemlist">
-           <ul>
-            {list.map((curItem) =>{
-                return(
-                <li key={curItem.id}>
-                   <div style={{
-                    textDecoration: curItem.completed ? 'line-through' : 'none',
-                  color: curItem.completed ? 'red' : 'black',
-                }}> {curItem.data}
-                   {curItem.date}</div>
-              <div className="task-btn">
-                <div onClick={()=>deleteItem(curItem.id)} title='Delete Task'><RiDeleteBin3Line/></div>
-                <div onClick={()=>editItem(curItem.id)} title='Edit Task'><FaEdit/></div>
-                <div onClick={()=>compItem(curItem.id)} title='Task Completed'><BsCSquare/></div>
-              </div>    
-                </li>
-           ) })}
-           </ul>   
+        <div className="filter">
+           <form >
+            <select name="" id="" onClick={filterItem} >
+                <option value="">All</option>
+                <option value="true">com</option>
+                <option value="false">incom</option>
+            </select>
+           </form>
         </div>
+        <div className="itemlist">
+                
+                        {filteredList.map((curItem) =>{
+                    
+                    
+                    return(     
+                     
+                            <li  key={curItem.id} >  
+                            <span style={{
+                            textDecoration: curItem.completed ? 'line-through' : 'none',
+                            color: curItem.completed ? 'red' : 'black',
+                            }}>
+                            {curItem.data}
+                            {curItem.date}</span>
+                            <span className="task-btn">
+                            <span onClick={()=>deleteItem(curItem.id)} title='Delete Task'><RiDeleteBin3Line/></span>
+                            <span onClick={()=>editItem(curItem.id)} title='Edit Task'><FaEdit/></span>
+                            <span onClick={()=>compItem(curItem.id)} title='Task Completed'><BsCSquare/></span>
+                            </span>    
+                            </li>
+                       )}
+               
+           )}</div>
     </div>
+
   )
 }
 
