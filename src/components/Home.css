@@ -1,0 +1,63 @@
+*{
+    background-color: #c0dbf3;
+}
+/* .main{
+
+   
+} */
+
+.inputs>input{
+    border-radius: 3px 0 0 3px;
+    border-style: double;
+    width: 169px;
+    font-size: 22px;
+    padding-top: 12px;
+}
+.items>button{
+    color: rgb(26, 26, 27);
+    background-color: rgb(125 128 128 / 61%);
+    width: 350px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 24px;
+    padding: 4px;
+}
+.filter>form>select{
+    width: 350px;
+    border-radius: 4px;
+    background: #e8e4e4;
+    border-style: hidden;
+    margin-top: 24px;
+    padding: 4px;
+}
+
+.hr{
+width: 500px;
+margin-left: 500px;
+margin-top: 10px;
+}
+.item>:nth-child(1){
+    font-size: 40px;
+    margin-right: 22px;
+}
+.item>:nth-child(2){
+    font-size: 30px;
+    margin-right: 22px;
+}
+.icons>span{
+    margin: 20px;
+   
+}
+.icons>span:hover{
+    color: rgb(191, 184, 185);
+    cursor: pointer;
+}
+.del>:nth-child(1){
+       transform: scale(1.5);
+}
+.edit>:nth-child(1){
+    transform: scale(1.5);
+}
+.com>:nth-child(1){
+    transform: scale(1.5);
+}

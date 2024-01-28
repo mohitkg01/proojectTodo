@@ -114,8 +114,10 @@ const filterItem = (event) => {
     return true;
   });
 
-
+  //dragable
+  
   return (
+
     <div className="main">
       <h1>Task Tracker</h1>  
         <div className="items">
@@ -123,7 +125,7 @@ const filterItem = (event) => {
             <input type="text" placeholder="Add task here..." value={inputData} onChange={changeHandler}/>
             <input type="date"  value={inputDate} onChange={(e)=> setInputDate(e.target.value)}/>
             </div>
-            { toggleBtn ? (<button onClick={addItem}>Add </button>):(
+            { toggleBtn ? (<button onClick={addItem}>Update</button>):(
                 <button onClick={addItem}>Add New</button>
             )}
         </div>
@@ -131,34 +133,36 @@ const filterItem = (event) => {
            <form >
             <select name="" id="" onClick={filterItem} >
                 <option value="">All</option>
-                <option value="true">com</option>
-                <option value="false">incom</option>
+                <option value="true">Compelete</option>
+                <option value="false">Incompelete</option>
             </select>
            </form>
         </div>
-        <div className="itemlist">
-                
+        <div className="itemlist" >
                         {filteredList.map((curItem) =>{
-                    
-                    
                     return(     
-                     
-                            <li  key={curItem.id} >  
-                            <span style={{
-                            textDecoration: curItem.completed ? 'line-through' : 'none',
+                        <div className='itemList'>
+                            <hr className='hr'/>
+                            <li key={curItem.id}  className='lists'>  
+                            <span className='item' style={{
+                            textDecoration: curItem.completed ? 'line' : 'none',
                             color: curItem.completed ? 'red' : 'black',
                             }}>
-                            {curItem.data}
-                            {curItem.date}</span>
-                            <span className="task-btn">
-                            <span onClick={()=>deleteItem(curItem.id)} title='Delete Task'><RiDeleteBin3Line/></span>
-                            <span onClick={()=>editItem(curItem.id)} title='Edit Task'><FaEdit/></span>
-                            <span onClick={()=>compItem(curItem.id)} title='Task Completed'><BsCSquare/></span>
+                            <span>{curItem.data}</span>    
+                            <span>{curItem.date}</span>    
+                            </span>
+                            <span className='icons'>
+                            <span className='del' onClick={()=>deleteItem(curItem.id)} title='Delete Task'><RiDeleteBin3Line/></span>
+                            <span className='edit' onClick={()=>editItem(curItem.id)} title='Edit Task'><FaEdit/></span>
+                            <span className='com' onClick={()=>compItem(curItem.id)} title='Task Completed'><BsCSquare/></span>
                             </span>    
                             </li>
+                            </div>
+                           
                        )}
                
            )}</div>
+           
     </div>
 
   )
