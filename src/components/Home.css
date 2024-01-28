@@ -1,11 +1,6 @@
 *{
     background-color: #c0dbf3;
 }
-/* .main{
-
-   
-} */
-
 .inputs>input{
     border-radius: 3px 0 0 3px;
     border-style: double;
@@ -16,14 +11,15 @@
 .items>button{
     color: rgb(26, 26, 27);
     background-color: rgb(125 128 128 / 61%);
-    width: 350px;
+    width: auto;
     border-radius: 10px;
     margin-top: 20px;
     font-size: 24px;
     padding: 4px;
 }
+
 .filter>form>select{
-    width: 350px;
+    width: 500px;
     border-radius: 4px;
     background: #e8e4e4;
     border-style: hidden;
@@ -32,21 +28,23 @@
 }
 
 .hr{
-width: 500px;
-margin-left: 500px;
+width: auto;
+margin-right: 25%;
+margin-left: 25%;
 margin-top: 10px;
 }
+
 .item>:nth-child(1){
-    font-size: 40px;
-    margin-right: 22px;
+    font-size: 30px;
+    margin-right: 12px;
 }
 .item>:nth-child(2){
-    font-size: 30px;
-    margin-right: 22px;
+    font-size: 25px;
+    /* margin-right: 22px; */
 }
 .icons>span{
-    margin: 20px;
-   
+    margin-left: 2%;
+    margin-right: 2%;   
 }
 .icons>span:hover{
     color: rgb(191, 184, 185);
@@ -61,3 +59,17 @@ margin-top: 10px;
 .com>:nth-child(1){
     transform: scale(1.5);
 }
+
+@media screen and (min-width: 358px){
+    .items > button {
+        width: 350px;
+      }
+    
+      .filter > form > select {
+        width: 100px;
+        font-size: 15px;
+      }
+      .item>span{
+        font-size: 4px;
+      }
+} 

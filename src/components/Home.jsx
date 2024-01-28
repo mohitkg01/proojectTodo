@@ -131,7 +131,7 @@ const filterItem = (event) => {
         </div>
         <div className="filter">
            <form >
-            <select name="" id="" onClick={filterItem} >
+            <select name="" id="" onClick={filterItem} className='opt'>
                 <option value="">All</option>
                 <option value="true">Compelete</option>
                 <option value="false">Incompelete</option>
