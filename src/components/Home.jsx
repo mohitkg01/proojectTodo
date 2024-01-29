@@ -114,7 +114,19 @@ const filterItem = (event) => {
     return true;
   });
 
-  //dragable
+  //drag and drop
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = Array.from(list);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setList(items);
+  };
+  
   
   return (
 
@@ -138,33 +150,53 @@ const filterItem = (event) => {
             </select>
            </form>
         </div>
-        <div className="itemlist" >
-                        {filteredList.map((curItem) =>{
-                    return(     
-                        <div className='itemList'>
-                            <hr className='hr'/>
-                            <li key={curItem.id}  className='lists'>  
-                            <span className='item' style={{
-                            textDecoration: curItem.completed ? 'line' : 'none',
-                            color: curItem.completed ? 'red' : 'black',
-                            }}>
-                            <span>{curItem.data}</span>    
-                            <span>{curItem.date}</span>    
-                            </span>
-                            <span className='icons'>
-                            <span className='del' onClick={()=>deleteItem(curItem.id)} title='Delete Task'><RiDeleteBin3Line/></span>
-                            <span className='edit' onClick={()=>editItem(curItem.id)} title='Edit Task'><FaEdit/></span>
-                            <span className='com' onClick={()=>compItem(curItem.id)} title='Task Completed'><BsCSquare/></span>
-                            </span>    
-                            </li>
-                            </div>
-                           
-                       )}
-               
-           )}</div>
-           
-    </div>
+        
+        <DragDropContext onDragEnd={onDragEnd}>
 
+        <Droppable droppableId="dropaable">
+          
+          {(provider) => (
+            <table className="itemlist" ref={provider.innerRef} {...provider.droppableProps}>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Date</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody className='lists'>
+                {filteredList.map((curItem, idx) => (
+                  <Draggable key={curItem.id} draggableId={curItem.id.toString()} index={idx}>
+                    {(provider) => (
+                      <tr
+                        {...provider.draggableProps}
+                        {...provider.dragHandleProps}
+                        ref={provider.innerRef}
+                        className='item'
+                        style={{
+                          textDecoration: curItem.completed ? 'line' : 'none',
+                          color: curItem.completed ? 'red' : 'black',
+                        }}
+                      >
+                        <td>{curItem.data}</td>
+                        <td>{curItem.date}</td>
+                        <td className='icons'>
+
+                          <span className='del' onClick={() => deleteItem(curItem.id)} title='Delete Task'><RiDeleteBin3Line /></span>
+                          <span className='edit' onClick={() => editItem(curItem.id)} title='Edit Task'><FaEdit /></span>
+                          <span className='com' onClick={() => compItem(curItem.id)} title='Task Completed'><BsCSquare /></span>
+                          
+                        </td>
+                      </tr>
+                    )}
+                  </Draggable>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </div>
   )
 }
 

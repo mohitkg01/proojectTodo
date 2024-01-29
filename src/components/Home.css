@@ -27,37 +27,54 @@
     padding: 4px;
 }
 
-.hr{
+/* .hr{
 width: auto;
 margin-right: 25%;
 margin-left: 25%;
 margin-top: 10px;
+} */
+th{
+    width: 200px;
 }
-
+.itemlist{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.item>td{
+    margin-left: 1px;
+}
 .item>:nth-child(1){
     font-size: 30px;
     margin-right: 12px;
+    
 }
 .item>:nth-child(2){
     font-size: 25px;
-    /* margin-right: 22px; */
 }
 .icons>span{
     margin-left: 2%;
-    margin-right: 2%;   
+   
 }
 .icons>span:hover{
     color: rgb(191, 184, 185);
     cursor: pointer;
 }
 .del>:nth-child(1){
-       transform: scale(1.5);
+    transform: scale(1.5);
+    margin-left: 20px;
+      
 }
 .edit>:nth-child(1){
     transform: scale(1.5);
+    margin-left: 20px;
+   
 }
 .com>:nth-child(1){
     transform: scale(1.5);
+    margin-left: 20px;
+    
 }
 
 @media screen and (min-width: 358px){
@@ -72,4 +89,27 @@ margin-top: 10px;
       .item>span{
         font-size: 4px;
       }
+
+      .icons>span:hover{
+        color: rgb(200, 17, 44);
+        cursor: pointer;
+    }
+    .del>:nth-child(1){
+        transform: scale(1.2);
+        margin-left: 2px;
+          
+    }
+    .edit>:nth-child(1){
+        transform: scale(1.2);
+        margin-left: 2px;
+       
+    }
+    .com>:nth-child(1){
+        transform: scale(1.2);
+        margin-left: 2px;
+        
+    }
+    .item>:nth-child(2){
+        font-size: 20px;
+    }
 } 
