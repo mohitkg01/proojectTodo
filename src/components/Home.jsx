@@ -155,16 +155,19 @@ const filterItem = (event) => {
 
         <Droppable droppableId="dropaable">
     
-          {(provider) => (
-            <table className="itemlist" ref={provider.innerRef} {...provider.droppableProps}>
+          {(provider,snapshot) => (
+            <table className="itemlist" ref={provider.innerRef} {...provider.droppableProps}
+            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}>
               <thead>
                 <tr>
-                  <th>Task</th>
-                  <th>Date</th>
-                  <th>Task Option</th>
-                </tr>
+                  <th> Task </th>
+                  <th> Date </th>
+                  <th> Task Option </th>
+                </tr>  
               </thead>
+              
               <tbody className='lists'>
+              
                 {filteredList.map((curItem, idx) => (
                   <Draggable key={curItem.id} draggableId={curItem.id.toString()} index={idx}>
                     {(provider) => (
@@ -174,19 +177,18 @@ const filterItem = (event) => {
                         ref={provider.innerRef}
                         className='item'
                         style={{
-                          textDecoration: curItem.completed ? 'line' : 'none',
+                          textDecoration: curItem.completed ? 'underline' : 'none',
                           color: curItem.completed ? 'red' : 'black',
                         }}
                       >
                         <td {...provider.dragHandleProps}>{curItem.data}</td>
                         <td>{curItem.date}</td>
                         <td className='icons'>
-
                           <span className='del' onClick={() => deleteItem(curItem.id)} title='Delete Task'><RiDeleteBin3Line /></span>
                           <span className='edit' onClick={() => editItem(curItem.id)} title='Edit Task'><FaEdit /></span>
                           <span className='com' onClick={() => compItem(curItem.id)} title='Task Completed'><BsCSquare /></span>
-                          
                         </td>
+                        <td className="line" style={{ borderBottom: '1px solid #000' }}></td> 
                       </tr>
                     )}
                   </Draggable>
