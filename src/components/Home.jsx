@@ -155,9 +155,8 @@ const filterItem = (event) => {
 
         <Droppable droppableId="dropaable">
     
-          {(provider,snapshot) => (
-            <table className="itemlist" ref={provider.innerRef} {...provider.droppableProps}
-            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}>
+          {(provider) => (
+            <table className="itemlist" ref={provider.innerRef} {...provider.droppableProps}>
               <thead>
                 <tr>
                   <th> Task </th>
@@ -170,13 +169,14 @@ const filterItem = (event) => {
               
                 {filteredList.map((curItem, idx) => (
                   <Draggable key={curItem.id} draggableId={curItem.id.toString()} index={idx}>
-                    {(provider) => (
+                    {(provider,snapshot) => (
                       <tr
                         {...provider.draggableProps}
                         
                         ref={provider.innerRef}
                         className='item'
                         style={{
+                          backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey',
                           textDecoration: curItem.completed ? 'underline' : 'none',
                           color: curItem.completed ? 'red' : 'black',
                         }}
