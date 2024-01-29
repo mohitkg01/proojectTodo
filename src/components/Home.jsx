@@ -155,9 +155,8 @@ const filterItem = (event) => {
 
         <Droppable droppableId="dropaable">
     
-          {(provider,snapshot) => (
-            <table className="itemlist" ref={provider.innerRef} {...provider.droppableProps}
-           style={{background: snapshot.draggingOverWith ? 'red' : 'grey'}}>
+          {(provider) => (
+            <table className="itemlist" ref={provider.innerRef} {...provider.droppableProps}>
               <thead>
                 <tr>
                   <th> Task </th>
