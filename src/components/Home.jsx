@@ -161,7 +161,7 @@ const filterItem = (event) => {
                 <tr>
                   <th>Task</th>
                   <th>Date</th>
-                  <th>Option</th>
+                  <th>Task Option</th>
                 </tr>
               </thead>
               <tbody className='lists'>
@@ -170,7 +170,7 @@ const filterItem = (event) => {
                     {(provider) => (
                       <tr
                         {...provider.draggableProps}
-                        {...provider.dragHandleProps}
+                        
                         ref={provider.innerRef}
                         className='item'
                         style={{
@@ -178,7 +178,7 @@ const filterItem = (event) => {
                           color: curItem.completed ? 'red' : 'black',
                         }}
                       >
-                        <td>{curItem.data}</td>
+                        <td {...provider.dragHandleProps}>{curItem.data}</td>
                         <td>{curItem.date}</td>
                         <td className='icons'>
 
