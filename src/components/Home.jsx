@@ -188,7 +188,7 @@ const filterItem = (event) => {
                           <span className='edit' onClick={() => editItem(curItem.id)} title='Edit Task'><FaEdit /></span>
                           <span className='com' onClick={() => compItem(curItem.id)} title='Task Completed'><BsCSquare /></span>
                         </td>
-                        <td className="line" style={{ borderBottom: '1px solid #000' }}></td> 
+                        <td className="line"></td> 
                       </tr>
                     )}
                   </Draggable>
