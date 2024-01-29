@@ -154,7 +154,7 @@ const filterItem = (event) => {
         <DragDropContext onDragEnd={onDragEnd}>
 
         <Droppable droppableId="dropaable">
-          
+    
           {(provider) => (
             <table className="itemlist" ref={provider.innerRef} {...provider.droppableProps}>
               <thead>
